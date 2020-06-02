@@ -6,11 +6,15 @@
   "dependencies": {
     "express": "^4.17.1",
     "jest": "^26.0.1",
+    "migrate": "^1.6.2",
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "jest",
+    "migrate": "sqlite3 db/election.db < db/schema.sql",
+    "seed": "sqlite3 db/election.db < db/seeds.sql",
+    "db" : "sqlite3 db/election.db",
     "start": "node server.js"
   },
   "repository": {
