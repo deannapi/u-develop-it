@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS parties;
 DROP TABLE IF EXISTS candidates;
+DROP TABLE IF EXISTS votes;
 
 CREATE TABLE parties (
   id INTEGER PRIMARY KEY,
@@ -18,3 +19,13 @@ CREATE TABLE candidates (
 
 SELECT * FROM candidates
 LEFT JOIN parties ON candidates.party_id = parties.id;
+
+CREATE TABLE votes (
+  id INTEGER PRIMARY KEY,
+  voter_id INTEGER UNSIGNED NOT NULL,
+  candidate_id INTEGER UNSIGNED NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT uc_voter UNIQUE (voter_id),
+  CONSTRAINT fk_voter FOREIGN KEY (voter_id) REFERENCES voters(id) ON DELETE CASCADE,
+  CONSTRAINT fk_candidate FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE
+);
