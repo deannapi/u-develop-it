@@ -1,7 +1,3 @@
-const inputCheck = require("./utils/inputCheck");
-// This statement sets the execution mode to verbose to produce
-// messages in the terminal regarding the state of the runtime.
-
 const express = require("express");
 const db = require('./db/database');
 
@@ -11,11 +7,14 @@ const app = express();
 
 // Bring in the routes
 const apiRoutes = require('./routes/apiRoutes');
-app.use('/api', apiRoutes);
+
 
 // Express.js Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Use the routes
+app.use('/api', apiRoutes);
 
 // Default response for any other request(Not Found) Catch all
 app.use((req, res) => {
